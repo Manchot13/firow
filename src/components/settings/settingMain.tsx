@@ -24,15 +24,21 @@ export default function SettingMain() {
                 </div>
             </div>
             <div >
+                <p className='font-bold mt-4'>
+                    Function
+                </p>
                 <div className='flex my-5 justify-center gap-[10%]'>
-                    <Function title="title" icon={<CgEditNoise />} type='pomodoro' />
-                    <Function title="title" icon={<CgEditNoise />} type='breath' />
+                    <Function title="Pomodoro" icon={<CgEditNoise />} type='pomodoro' />
+                    <Function title="Breath" icon={<CgEditNoise />} type='breath' />
                 </div>
             </div>
             <div >
+                <p className='font-bold mt-4'>
+                    Modal
+                </p>
                 <div className='my-5 relative grid-row-2 grid gap-[10%]'>
                     <ButtonFunction title="Clock" icon={<FiClock />} type='clock' />
-                    <ButtonFunction title="ToDo list" icon={<FaTasks />} type='todo' />
+                    <ButtonFunction title="ToDo List" icon={<FaTasks />} type='todo' />
                 </div>
             </div>
         </div>

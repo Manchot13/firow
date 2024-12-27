@@ -34,8 +34,8 @@ export default function Home() {
             <clockModal />
           )}
         </div>
-        <div className="absolute right-8 top-8 text-2xl" onClick={handleClick} >
-          <RiSettings3Line />
+        <div className="absolute right-6 top-6 text-2xl" onClick={handleClick} >
+          <RiSettings3Line className='text-4xl'/>
           {isHandleModal === 'open' && (
             <SettingFlame />
           )}

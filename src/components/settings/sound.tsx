@@ -15,7 +15,7 @@ export default function Sound({ title, icon }: Props) {
                     </div>
                 </div>
             </div>
-            <p className="text-center font-bold mt-2">{title}</p>
+            <p className="text-center text-lg font-bold mt-2">{title}</p>
         </div>
     );
 }
