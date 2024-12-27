@@ -8,12 +8,12 @@ export default function TodoModal() {
     const [list, setList] = useAtom(todolist);
 
     return (
-        <div className="bg-gray-400 rounded-lg">
+        <div className="">
             <input
                 value={name}
                 onChange={e => setName(e.target.value)}
                 placeholder="Enter a task name"
-                className="bg-red-400 p-5 rounded-lg"
+                className="bg-red-400 p-5 rounded-lg w-[50%]"
             />
             <button
                 onClick={() => {
@@ -26,7 +26,7 @@ export default function TodoModal() {
             </button>
             <ul>
                 {list.map(item => (
-                    <li key={item.id}>{item.name}</li>
+                    <li key={item.id} className="my-5">{item.name}</li>
                 ))}
             </ul>
         </div>
