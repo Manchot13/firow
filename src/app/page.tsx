@@ -38,7 +38,7 @@ export default function Home() {
           )}
         </div>
         <div className="absolute right-6 top-6 text-2xl" onClick={handleClick} >
-          <RiSettings3Line className='text-4xl' />
+          <RiSettings3Line className='text-4xl transition-transform duration-300 ease-in-out hover:rotate-180' />
           {isHandleModal === 'open' && (
             <SettingFlame />
           )}
