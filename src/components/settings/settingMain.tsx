@@ -1,9 +1,12 @@
 import Sound from "@/components/settings/sound";
 import Function from "@/components/settings/function";
 import ButtonFunction from "@/components/settings/buttonFunction";
-import { CgEditNoise } from "react-icons/cg";
+import { CgEditNoise, CgTimer } from "react-icons/cg";
 import { FiClock } from 'react-icons/fi';
 import { FaTasks } from 'react-icons/fa';
+import { MdOutlineLocalFireDepartment } from "react-icons/md";
+import { BsCloudRain } from "react-icons/bs";
+import { LuLeaf } from "react-icons/lu";
 
 
 export default function SettingMain() {
@@ -18,9 +21,9 @@ export default function SettingMain() {
                     Sound
                 </p>
                 <div className='flex my-5'>
-                    <Sound title="title" icon={<CgEditNoise />} />
-                    <Sound title="title" icon={<CgEditNoise />} />
-                    <Sound title="title" icon={<CgEditNoise />} />
+                    <Sound title="Rain" icon={<BsCloudRain />} />
+                    <Sound title="Noise" icon={<CgEditNoise />} />
+                    <Sound title="Fire" icon={<MdOutlineLocalFireDepartment />} />
                 </div>
             </div>
             <div >
@@ -28,8 +31,8 @@ export default function SettingMain() {
                     Function
                 </p>
                 <div className='flex my-5 justify-center gap-[10%]'>
-                    <Function title="Pomodoro" icon={<CgEditNoise />} type='pomodoro' />
-                    <Function title="Breath" icon={<CgEditNoise />} type='breath' />
+                    <Function title="Pomodoro" icon={<CgTimer />} type='pomodoro' />
+                    <Function title="Breath" icon={<LuLeaf />} type='breath' />
                 </div>
             </div>
             <div >

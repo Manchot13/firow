@@ -29,13 +29,13 @@ export default function Home() {
               priority
             />
           </div>
+          {isClockOn === true && (
+              <ClockModal />
+            )}
         </div>
         <div>
           {isToDoOn === true && (
             <TodoModal />
-          )}
-          {isClockOn === true && (
-            <ClockModal />
           )}
         </div>
         <div className="absolute right-6 top-6 text-2xl" onClick={handleClick} >

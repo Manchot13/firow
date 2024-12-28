@@ -8,7 +8,7 @@ type Props = {
 export default function Sound({ title, icon }: Props) {
     return (
         <div className="w-1/3">
-            <div className="bg-white aspect-square rounded-full w-[90%] text-[100%]">
+            <div className="bg-white hover:bg-gray-100 aspect-square rounded-full w-[90%] text-[100%]">
                 <div className="w-full h-full flex items-center justify-center">
                     <div className="w-full h-full flex items-center justify-center">
                         {icon}
