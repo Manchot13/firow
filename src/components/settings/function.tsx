@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 type Props = {
     title: string;
     icon: ReactNode;
-    type: 'pomodoro' | 'breath';
+    type: 'Pomodoro' | 'Breath';
 
 };
 
@@ -15,9 +15,9 @@ export default function Function({ title, icon, type }: Props) {
     const setSettingType = useSetAtom(settingType)
     
     const handleToggle = () => {
-        if (type === "pomodoro") {
+        if (type === "Pomodoro") {
             setIsPomodoroOn(!isPomodoroOn);
-        } else if (type === "breath") {
+        } else if (type === "Breath") {
             setIsBreathOn(!isBreathOn);
         }
         setSettingType(type);
@@ -28,7 +28,7 @@ export default function Function({ title, icon, type }: Props) {
             <button className="bg-white  hover:bg-gray-100 aspect-square rounded-[20%] w-[90%] text-[100%]"
                 onClick={handleToggle}>
                 <div className="w-full h-full flex ">
-                    <div className="w-full h-full flex items-center justify-center">
+                    <div className="w-full h-full flex items-center justify-center text-4xl">
                         {icon}
                     </div>
                 </div>

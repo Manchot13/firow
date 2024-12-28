@@ -7,6 +7,7 @@ import { FaTasks } from 'react-icons/fa';
 import { MdOutlineLocalFireDepartment } from "react-icons/md";
 import { BsCloudRain } from "react-icons/bs";
 import { LuLeaf } from "react-icons/lu";
+import { IoIosArrowForward } from "react-icons/io";
 
 
 export default function SettingMain() {
@@ -31,8 +32,8 @@ export default function SettingMain() {
                     Function
                 </p>
                 <div className='flex my-5 justify-center gap-[10%]'>
-                    <Function title="Pomodoro" icon={<CgTimer />} type='pomodoro' />
-                    <Function title="Breath" icon={<LuLeaf />} type='breath' />
+                    <Function title="Pomodoro" icon={<CgTimer />} type='Pomodoro' />
+                    <Function title="Breath" icon={<LuLeaf />} type='Breath' />
                 </div>
             </div>
             <div >
@@ -42,6 +43,14 @@ export default function SettingMain() {
                 <div className='my-5 relative grid-row-2 grid gap-[10%]'>
                     <ButtonFunction title="Clock" icon={<FiClock />} type='clock' />
                     <ButtonFunction title="ToDo List" icon={<FaTasks />} type='todo' />
+                </div>
+            </div>
+            <div className="flex pt-4 items-center">
+                <p className='text-xl font-bold'>
+                    Source
+                </p>
+                <div className="ml-auto">
+                    <IoIosArrowForward />
                 </div>
             </div>
         </div>
