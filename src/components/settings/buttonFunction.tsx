@@ -19,7 +19,6 @@ export default function ButtonFunction({ title, icon, type }: Props) {
         } else if (type === "todo") {
             setIsToDoOn(!isToDoOn);
         }
-        // setSettingType(type);
     };
 
     const isOn = type === "clock" ? isClockOn : isToDoOn;

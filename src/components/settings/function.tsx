@@ -1,24 +1,24 @@
-import { breathSwitch, pomodoroSwitch, settingType } from "@/globalStateAtoms/atoms";
+import { BreatheSwitch, pomodoroSwitch, settingType } from "@/globalStateAtoms/atoms";
 import { useAtom, useSetAtom } from "jotai";
 import { ReactNode } from "react";
 
 type Props = {
     title: string;
     icon: ReactNode;
-    type: 'Pomodoro' | 'Breath';
+    type: 'Pomodoro' | 'Breathe';
 
 };
 
 export default function Function({ title, icon, type }: Props) {
     const [isPomodoroOn, setIsPomodoroOn] = useAtom(pomodoroSwitch);
-    const [isBreathOn, setIsBreathOn] = useAtom(breathSwitch);
+    const [isBreatheOn, setIsBreatheOn] = useAtom(BreatheSwitch);
     const setSettingType = useSetAtom(settingType)
     
     const handleToggle = () => {
         if (type === "Pomodoro") {
             setIsPomodoroOn(!isPomodoroOn);
-        } else if (type === "Breath") {
-            setIsBreathOn(!isBreathOn);
+        } else if (type === "Breathe") {
+            setIsBreatheOn(!isBreatheOn);
         }
         setSettingType(type);
     };

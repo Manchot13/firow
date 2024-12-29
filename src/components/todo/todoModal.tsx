@@ -9,7 +9,7 @@ export default function TodoModal() {
     const [list, setList] = useAtom(todolist);
 
     return (
-        <div className="absolute top-10 left-10">
+        <div className="absolute top-10 left-10 tracking-widest">
             <div className="flex items-end gap-4 text-3xl font-bold">
                 <div className="flex items-center gap-4">
                     <FaTasks className="text-2xl" />
