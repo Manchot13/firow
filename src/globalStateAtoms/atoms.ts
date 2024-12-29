@@ -7,6 +7,7 @@ export const toDoSwitch = atom(false);
 export const settingType = atom("Setting");
 export const timeAtom = atom(new Date());
 export const todoName = atom("");
+export const isClockSecondAtom = atom(false);
 type Task = {
     id: number;
     name: string;
