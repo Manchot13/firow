@@ -4,21 +4,15 @@ import SettingMain from './settingMain';
 import { FaTimes } from 'react-icons/fa';
 import SettingBreathe from './settingBreathe';
 import SettingPomodoro from './settingPomorodo';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import SettingSource from './settingSource';
 import SettingAdvance from './settingAdvance';
+import SettingDrumRoll from './settingDrumRoll';
 
 export default function Setting() {
     const [isHandleModal, setHandleModal] = useAtom(handleState);
     const [settingText, setSettingType] = useAtom(settingType);
-    const [hydrated, setHydrated] = useState(false);
-
-    useEffect(() => {
-        setHydrated(true); // クライアントサイドでのみ実行
-    }, []);
-
-    if (!hydrated) return null; // サーバーでの初期レンダリングを防止
-
+   
     const handleClick = () => {
         setSettingType("Setting");
         setHandleModal(isHandleModal === 'close' ? 'open' : 'close');
@@ -32,8 +26,10 @@ export default function Setting() {
                 return <SettingBreathe />;
             case 'Source':
                 return <SettingSource />;
-                 case 'Advance':
+            case 'Advance':
                 return <SettingAdvance />;
+            case 'Drum_Roll':
+                return <SettingDrumRoll startTime={1} endTime={30} timeInterval={4} />;
             default:
                 return <SettingMain />;
         }

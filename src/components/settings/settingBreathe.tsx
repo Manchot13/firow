@@ -1,5 +1,5 @@
-import { settingType } from "@/globalStateAtoms/atoms";
-import { useSetAtom } from "jotai";
+import { breatheTimeAtom, settingType } from "@/globalStateAtoms/atoms";
+import { useAtomValue, useSetAtom } from "jotai";
 import { IoIosArrowBack } from "react-icons/io";
 import { RiFocusLine } from "react-icons/ri";
 import { SiStagetimer } from "react-icons/si";
@@ -13,6 +13,7 @@ export default function SettingBreathe() {
     const handleClick = () => {
         setSettingType("Setting");
     };
+    const breathTime = useAtomValue(breatheTimeAtom)
 
     return (
         <div
@@ -46,7 +47,7 @@ export default function SettingBreathe() {
                 />
             </div>
             <div className="mt-6">
-                <TextFunction title={"Time"} icon={<></>} type={""} />
+                <TextFunction title={"Time"} icon={<></>} type={"Drum_Roll"} subtitle={`${breathTime} 分`} />
             </div>
         </div>
     );
