@@ -1,26 +1,29 @@
-import Sound from "@/components/settings/sound";
+import CircleButton from "@/components/settings/circleButton";
 import Function from "@/components/settings/function";
 import ButtonFunction from "@/components/settings/buttonFunction";
-import { CgEditNoise } from "react-icons/cg";
+import { CgEditNoise, CgTimer } from "react-icons/cg";
 import { FiClock } from 'react-icons/fi';
 import { FaTasks } from 'react-icons/fa';
+import { MdOutlineLocalFireDepartment } from "react-icons/md";
+import { BsCloudRain } from "react-icons/bs";
+import { LuLeaf, LuSettings2 } from "react-icons/lu";
+import TextFunction from "./textFunction";
+import { PiTextAlignLeftBold } from "react-icons/pi";
 
 
 export default function SettingMain() {
 
     return (
         <div
-            className="bg-gray-200 p-5 absolute right-5 top-5 w-[15%] min-w-64 rounded-xl shadow-lg divide-gray-400 divide-y-2"
-            onClick={(e) => e.stopPropagation()} // 子要素クリックで背景イベントを止める
-        >
+            className=" divide-gray-400 divide-y-2">
             <div >
                 <p className='font-bold'>
                     Sound
                 </p>
-                <div className='flex my-5'>
-                    <Sound title="title" icon={<CgEditNoise />} />
-                    <Sound title="title" icon={<CgEditNoise />} />
-                    <Sound title="title" icon={<CgEditNoise />} />
+                <div className='flex my-5 justify-center gap-[5%]'>
+                    <CircleButton title="Rain" icon={<BsCloudRain />} />
+                    <CircleButton title="Noise" icon={<CgEditNoise />} />
+                    <CircleButton title="Fire" icon={<MdOutlineLocalFireDepartment />} />
                 </div>
             </div>
             <div >
@@ -28,8 +31,8 @@ export default function SettingMain() {
                     Function
                 </p>
                 <div className='flex my-5 justify-center gap-[10%]'>
-                    <Function title="Pomodoro" icon={<CgEditNoise />} type='pomodoro' />
-                    <Function title="Breath" icon={<CgEditNoise />} type='breath' />
+                    <Function title="Pomodoro" icon={<CgTimer />} type='Pomodoro' />
+                    <Function title="Breathe" icon={<LuLeaf />} type='Breathe' />
                 </div>
             </div>
             <div >
@@ -40,6 +43,12 @@ export default function SettingMain() {
                     <ButtonFunction title="Clock" icon={<FiClock />} type='clock' />
                     <ButtonFunction title="ToDo List" icon={<FaTasks />} type='todo' />
                 </div>
+            </div>
+            <div className="flex py-4 items-center relative w-full">
+                <TextFunction title={"Advance"} type={"Advance"} icon={<LuSettings2 />} />
+            </div>
+            <div className="flex pt-4 items-center relative w-full">
+                <TextFunction title={"Source"} type={"Source"} icon={<PiTextAlignLeftBold />} />
             </div>
         </div>
     );

@@ -1,11 +1,15 @@
-
-
+import dynamic from "next/dynamic";
+const Clock = dynamic(() => import("@/components/clock/clock"), {
+	ssr: false,
+});
 
 export default function ClockModal() {
 
     return (
-        <div className="text-4xl bg-blue-400 w-screen h-screen absolute">
-            Clock
-        </div>
+		<main className="relative pt-[5%] pr-[5%]">
+			<div className="m-auto text-black text-[8vw] font-bold w-fit">
+				<Clock />
+			</div>
+		</main>
     );
 }
