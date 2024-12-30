@@ -1,6 +1,5 @@
 import { angleAtom, isDraggingAtom, pomodoroTimeAtom } from "@/globalStateAtoms/atoms";
 import { useAtom } from "jotai";
-import { useState } from "react";
 
 export default function TimerInputClock() {
     const [angle, setAngle] = useAtom(angleAtom); // 現在の角度
@@ -43,8 +42,7 @@ export default function TimerInputClock() {
 
     return (
         <div
-            className="bg-gray-200 p-5 absolute right-5 top-5 w-[15%] min-w-64 rounded-xl shadow-lg divide-y-2"
-            onClick={(e) => e.stopPropagation()} // 子要素クリックで背景イベントを止める
+            className=" divide-gray-400 divide-y-2"
             aria-label="Timer Input Clock"
         >
             {/* 時計の背景 */}
@@ -75,9 +73,8 @@ export default function TimerInputClock() {
                 <div
                     className="absolute w-full h-full bg-blue-300 rounded-full clip-circle"
                     style={{
-                        clipPath: `polygon(50% 50%, 50% 0%, ${
-                            50 + 50 * Math.cos((angle - 90) * (Math.PI / 180))
-                        }% ${50 + 50 * Math.sin((angle - 90) * (Math.PI / 180))}%, 50% 50%)`,
+                        clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.cos((angle - 90) * (Math.PI / 180))
+                            }% ${50 + 50 * Math.sin((angle - 90) * (Math.PI / 180))}%, 50% 50%)`,
                     }}
                     aria-hidden="true"
                 />

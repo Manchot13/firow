@@ -7,11 +7,7 @@ import { RiSettings3Line } from "react-icons/ri";
 import SettingFlame from "@/components/settings/settingFlame";
 import TodoModal from "@/components/todo/todoModal";
 import ClockModal from "@/components/clock/clockModal";
-
 import { handleState, clockSwitch, toDoSwitch } from '@/globalStateAtoms/atoms';
-import ButtonFunction from "@/components/settings/buttonFunction";
-import { FiClock } from "react-icons/fi";
-import { FaTasks } from "react-icons/fa";
 
 export default function Home() {
   const [isHandleModal, setHandleModal] = useAtom(handleState);

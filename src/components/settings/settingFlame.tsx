@@ -7,8 +7,9 @@ import SettingPomodoro from './settingPomorodo';
 import { useEffect, useState } from 'react';
 import SettingSource from './settingSource';
 import SettingAdvance from './settingAdvance';
+import { IoIosArrowBack } from 'react-icons/io';
 
-export default function Setting() {
+export default function SettingFlame() {
     const [isHandleModal, setHandleModal] = useAtom(handleState);
     const [settingText, setSettingType] = useAtom(settingType);
     const [hydrated, setHydrated] = useState(false);
@@ -24,6 +25,11 @@ export default function Setting() {
         setHandleModal(isHandleModal === 'close' ? 'open' : 'close');
     };
 
+    const returnHandleClick = () => {
+        setSettingType("Setting");
+    };
+
+
     const renderContent = () => {
         switch (settingText) {
             case 'Pomodoro':
@@ -32,7 +38,7 @@ export default function Setting() {
                 return <SettingBreathe />;
             case 'Source':
                 return <SettingSource />;
-                 case 'Advance':
+            case 'Advance':
                 return <SettingAdvance />;
             default:
                 return <SettingMain />;
@@ -47,13 +53,28 @@ export default function Setting() {
             <p className="absolute bottom-[5vw] -left-[3vw] text-white text-[20vw] items-end font-bold opacity-50">
                 {settingText}
             </p>
-            {renderContent()}
-            <button
-                onClick={handleClick}
-                className="absolute right-8 top-8"
+            <div className="bg-gray-200 p-5 absolute right-5 top-5 w-[15%] min-w-72 rounded-xl shadow-lg"
+                onClick={(e) => e.stopPropagation()} // 子要素クリックで背景イベントを止める
+            // 子要素クリックで背景イベントを止める
             >
-                <FaTimes />
-            </button>
+                <div className='flex mb-4'>
+                    {settingText != "Setting"&& (<button
+                        onClick={returnHandleClick} // ボタンのみでクリックを処理
+                        className=""
+                    >
+                        <IoIosArrowBack />
+                    </button>)}
+                    <div className="font-bold mx-auto text-2xl">{settingText}</div>
+                    <button
+                        onClick={handleClick}
+                        className=""
+                    >
+                        <FaTimes />
+                    </button>
+                </div>
+                {renderContent()}
+
+            </div>
         </div>
     );
 }
