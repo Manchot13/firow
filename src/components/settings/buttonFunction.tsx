@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import { useAtom } from "jotai";
-import { clockSwitch, toDoSwitch, writeSettingType } from "@/globalStateAtoms/atoms";
+import { clockSwitch, toDoSwitch } from "@/globalStateAtoms/atoms";
 import SwitchButton from "./switchButton";
 
 type Props = {
@@ -12,7 +12,6 @@ type Props = {
 export default function ButtonFunction({ title, icon, type }: Props) {
     const [isClockOn, setIsClockOn] = useAtom(clockSwitch);
     const [isToDoOn, setIsToDoOn] = useAtom(toDoSwitch);
-    const [, setSettingType] = useAtom(writeSettingType); // 設定タイプを更新する関数を取得
 
     const handleToggle = () => {
         if (type === "clock") {
@@ -20,7 +19,6 @@ export default function ButtonFunction({ title, icon, type }: Props) {
         } else if (type === "todo") {
             setIsToDoOn(!isToDoOn);
         }
-        setSettingType(type);
     };
 
     const isOn = type === "clock" ? isClockOn : isToDoOn;
