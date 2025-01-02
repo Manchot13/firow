@@ -1,4 +1,3 @@
-import { useState } from "react";
 
 export default function Se() {
     const [angle, setAngle] = useState(0);
@@ -22,25 +21,71 @@ export default function Se() {
 
     return (
         <div
-            onMouseMove={handleMouseMove}
-            onMouseUp={handleMouseUp}
-            onMouseLeave={handleMouseUp}
-            className="flex flex-col items-center justify-center min-h-screen bg-gray-100"
+            className=" divide-gray-400 divide-y-2"
+            aria-label="Timer Input Clock"
         >
-            {/* 回転バー */}
+            {/* 時計の背景 */}
             <div
-                className="relative w-20 h-4 bg-blue-500 rounded-full cursor-pointer"
-                onMouseDown={handleMouseDown}
-                style={{ transform: `rotate(${angle}deg)` }}
-            />
+                className="relative w-56 h-56 bg-gray-100 rounded-full shadow-md"
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseUp}
+                onTouchStart={(e) => setIsDragging(true)}
+                onTouchMove={(e) => {
+                    if (!isDragging) return;
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    const centerX = rect.left + rect.width / 2;
+                    const centerY = rect.top + rect.height / 2;
+                    const touch = e.touches[0];
+                    const dx = touch.clientX - centerX;
+                    const dy = touch.clientY - centerY;
+                    const radians = Math.atan2(dy, dx);
+                    const newAngle = (radians * (180 / Math.PI) + 360) % 360;
+                    const totalMinutes = Math.round((newAngle / 360) * 60) + Math.floor(time / 60) * 60;
+                    setAngle(newAngle);
+                    setTime(totalMinutes);
+                }}
+                onTouchEnd={() => setIsDragging(false)}
+                aria-label="Clock Interface"
+            >
+                {/* 時計のセクター */}
+                <div
+                    className="absolute w-full h-full bg-blue-300 rounded-full clip-circle"
+                    style={{
+                        clipPath: `polygon(50% 50%, 50% 0%, ${50 + 50 * Math.cos((angle - 90) * (Math.PI / 180))
+                            }% ${50 + 50 * Math.sin((angle - 90) * (Math.PI / 180))}%, 50% 50%)`,
+                    }}
+                    aria-hidden="true"
+                />
 
-            {/* 入力フィールド */}
-            <input
-                type="number"
-                value={Math.round(angle)}
-                readOnly
-                className="mt-5 p-2 border rounded"
-            />
+                {/* 時計の針 */}
+                <div
+                    className="relative w-1 h-28 bg-blue-500 origin-bottom rounded-full"
+                    style={{ transform: `rotate(${angle}deg)`, left: "50%" }}
+                    onMouseDown={handleMouseDown}
+                    aria-hidden="true"
+                />
+                <div
+                    className="absolute w-6 h-6 bg-white border-2 border-blue-500 rounded-full"
+                    style={{ left: "calc(50% - 12px)", top: "calc(50% - 12px)" }}
+                    aria-hidden="true"
+                />
+            </div>
+
+            {/* 時間表示と入力 */}
+            <div className="mt-5 flex flex-col items-center">
+                <div className="text-xl font-semibold text-gray-700">
+                    {formatTime(time)}
+                </div>
+                <input
+                    type="number"
+                    min="0"
+                    value={time}
+                    onChange={handleInputChange}
+                    className="mt-2 w-20 p-2 border rounded text-center text-lg"
+                    aria-label="Time Input"
+                />
+            </div>
         </div>
     );
 }

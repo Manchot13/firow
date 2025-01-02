@@ -15,9 +15,7 @@ export default function SettingMain() {
 
     return (
         <div
-            className="bg-gray-200 p-5 absolute right-5 top-5 w-[15%] min-w-72 rounded-xl shadow-lg divide-gray-400 divide-y-2"
-            onClick={(e) => e.stopPropagation()} // 子要素クリックで背景イベントを止める
-        >
+            className=" divide-gray-400 divide-y-2">
             <div >
                 <p className='font-bold'>
                     Sound
