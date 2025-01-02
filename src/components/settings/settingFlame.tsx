@@ -1,10 +1,9 @@
-import { useAtom } from 'jotai';
-import { handleState, settingType } from '@/globalStateAtoms/atoms';
+import { useAtom, useAtomValue } from 'jotai';
+import { DrumRollTagATom, endTimeAtom, handleState, settingType, startTimeAtom, timeIntervalAtom } from '@/globalStateAtoms/atoms';
 import SettingMain from './settingMain';
 import { FaTimes } from 'react-icons/fa';
 import SettingBreathe from './settingBreathe';
 import SettingPomodoro from './settingPomorodo';
-import { useEffect } from 'react';
 import SettingSource from './settingSource';
 import SettingAdvance from './settingAdvance';
 import { IoIosArrowBack } from 'react-icons/io';
@@ -13,7 +12,11 @@ import SettingDrumRoll from './settingDrumRoll';
 export default function SettingFlame() {
     const [isHandleModal, setHandleModal] = useAtom(handleState);
     const [settingText, setSettingType] = useAtom(settingType);
-   
+    const startTime = useAtomValue(startTimeAtom);
+    const endTime = useAtomValue(endTimeAtom);
+    const timeInterval = useAtomValue(timeIntervalAtom);
+    const tag = useAtomValue(DrumRollTagATom);
+
     const handleClick = () => {
         setSettingType("Setting");
         setHandleModal(isHandleModal === 'close' ? 'open' : 'close');
@@ -34,8 +37,8 @@ export default function SettingFlame() {
                 return <SettingSource />;
             case 'Advance':
                 return <SettingAdvance />;
-            case 'Drum_Roll':
-                return <SettingDrumRoll startTime={1} endTime={30} timeInterval={4} />;
+            case 'DrumRoll':
+                return <SettingDrumRoll startTime={startTime} endTime={endTime} timeInterval={timeInterval} tag={tag} />;
             default:
                 return <SettingMain />;
         }
@@ -54,7 +57,7 @@ export default function SettingFlame() {
             // 子要素クリックで背景イベントを止める
             >
                 <div className='flex mb-4'>
-                    {settingText != "Setting"&& (<button
+                    {settingText != "Setting" && (<button
                         onClick={returnHandleClick} // ボタンのみでクリックを処理
                         className=""
                     >
