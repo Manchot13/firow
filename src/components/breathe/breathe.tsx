@@ -1,88 +1,146 @@
-import { breatheModalSwitch, breatheModalSwitchCounter, breatheTimeAtom, breatheType, circleSizeAtom, ElapsedTimeAtom, handleState, setBreatheFinished, settingType } from "@/globalStateAtoms/atoms";
+import { breatheModalSwitch, breatheModalSwitchCounter, breatheTimeAtom, breatheType, breatheWait, breatheWaitTime, circleSizeAtom, ElapsedTimeAtom, setBreatheFinished } from "@/globalStateAtoms/atoms";
 import { useAtom, useAtomValue } from "jotai";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 
 export default function Breathe() {
-    const refTime = 20
+    const refTime = 20;
     const refreshPerSecond = 1000 / refTime;
-
     const isBreatheType = useAtomValue(breatheType);
     const [circleSize, setLocalCircleSize] = useAtom(circleSizeAtom);
     const breathTime = useAtomValue(breatheTimeAtom) * 60 * refreshPerSecond;
     const [elapsedTime, setElapsedTime] = useAtom(ElapsedTimeAtom);
     const [isSetBreatheModal, setBreatheModal] = useAtom(breatheModalSwitch);
-    const [finished, setFinished] = useAtom(setBreatheFinished); // 終了状態を管理
+    const [finished, setFinished] = useAtom(setBreatheFinished);
     const [isBreatheModalSwitchCounter, setBreatheModalSwitchCounter] = useAtom(breatheModalSwitchCounter);
+    const [waiting, setWaiting] = useAtom(breatheWait); // Waiting state
+    const [remainingTime, setRemainingTime] = useAtom(breatheWaitTime); // 7秒のカウントダウン
 
-    let inhaleTime = isBreatheType === "Sleep" ? 4 : 5;
+    let inhaleTime = isBreatheType === "Normal" ? 7 : isBreatheType === "Sleep" ? 4 : 5;
     let holdTime = isBreatheType === "Normal" ? 0 : isBreatheType === "Sleep" ? 7 : 5;
-    let exhaleTime = isBreatheType === "Normal" ? 5 : isBreatheType === "Sleep" ? 8 : 5;
+    let exhaleTime = isBreatheType === "Normal" ? 7 : isBreatheType === "Sleep" ? 8 : 5;
     let pauseTime = isBreatheType === "Focus" ? 5 : 0;
-    inhaleTime = inhaleTime * refreshPerSecond
-    holdTime = holdTime * refreshPerSecond
-    exhaleTime = exhaleTime * refreshPerSecond
-    pauseTime = pauseTime * refreshPerSecond
+
+    inhaleTime = inhaleTime * refreshPerSecond;
+    holdTime = holdTime * refreshPerSecond;
+    exhaleTime = exhaleTime * refreshPerSecond;
+    pauseTime = pauseTime * refreshPerSecond;
 
     const handleModal = () => {
         if (isBreatheModalSwitchCounter < 1) {
             setBreatheModalSwitchCounter((prev) => prev + 1);
-            <div className="absolute">
-                click one more
-            </div>
             return;
-            
         }
-        setFinished((prev) => !prev);
+        setFinished(true); // Directly set finished to trigger modal close
         setBreatheModalSwitchCounter(0);
     };
 
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setWaiting(false); // Start breathing after 10 seconds
+        }, 7000); // 10 seconds
 
+        return () => clearTimeout(timer); // Clear timeout if component unmounts
+    }, []);
 
     useEffect(() => {
+        if (waiting) return; // Don't start breathing if waiting
+
         const totalCycleTime = inhaleTime + holdTime + exhaleTime + pauseTime;
         const timer = setInterval(() => {
             setElapsedTime((prev) => {
                 if (prev >= breathTime) {
                     clearInterval(timer);
-                    setFinished(true); // 終了状態を設定
+                    setFinished(true);
                     return prev;
                 }
                 return prev + 1;
             });
 
             const cyclePosition = (elapsedTime + 1) % totalCycleTime;
-
             if (cyclePosition < inhaleTime) {
-                setLocalCircleSize(30 + (cyclePosition / inhaleTime) * 70);
+                setLocalCircleSize(30 + (cyclePosition / inhaleTime) * 50);
             } else if (cyclePosition < inhaleTime + holdTime) {
-                setLocalCircleSize(100);
+                setLocalCircleSize(80);
             } else if (cyclePosition < inhaleTime + holdTime + exhaleTime) {
-                setLocalCircleSize(100 - ((cyclePosition - inhaleTime - holdTime) / exhaleTime) * 70);
+                setLocalCircleSize(80 - ((cyclePosition - inhaleTime - holdTime) / exhaleTime) * 50);
             } else {
                 setLocalCircleSize(30);
             }
         }, refTime);
+
         return () => clearInterval(timer);
-    }, [elapsedTime, breathTime, inhaleTime, holdTime, exhaleTime, pauseTime]);
+    }, [elapsedTime, breathTime, inhaleTime, holdTime, exhaleTime, pauseTime, waiting]); // Add waiting to dependency array
+
     useEffect(() => {
         setLocalCircleSize(circleSize);
     }, [circleSize]);
 
     useEffect(() => {
         if (finished) {
-            setBreatheModal(!isSetBreatheModal); // 終了時にモーダルを切り替え
-            setFinished(!finished);
-            setElapsedTime(0)
+            setBreatheModal(!isSetBreatheModal);
+            setFinished(false); // Reset finished state
+            setElapsedTime(0);
+            setWaiting(true);
+            setRemainingTime(5);
         }
     }, [finished, setBreatheModal, isSetBreatheModal]);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setRemainingTime((prev) => {
+                if (prev <= 1) {
+                    clearInterval(timer);
+                    return 0; // 0に設定
+                }
+                return prev - 1; // 1秒減らす
+            });
+        }, 1000); // 1秒ごとに更新
+
+        return () => clearInterval(timer); // クリーンアップ
+    }, []);
 
     const totalCycleTime = inhaleTime + holdTime + exhaleTime + pauseTime;
     const cyclePosition = elapsedTime % totalCycleTime;
 
+    if (waiting) {
+        return (
+            <div className="fixed inset-0 flex items-center justify-center bg-snow-500 text-snow-700 font-[family-name:var(--font-geist-sans)]">
+                <div className="bg-gray-200 p-5 w-[35%] relative aspect-square min-w-72 rounded-xl shadow-lg flex flex-col justify-center items-center">
+                    <div className="my-auto">
+                        <div className="text-4xl text-center">
+                            Waiting...
+                        </div>
+                        <div className="text-4xl text-center mt-4">
+                            {remainingTime + 1}sec
+                        </div>
+                    </div>
+                    <div className="tracking-wider text-center">
+                        Breathe in through the nose.<br />
+                        Hold breath.<br />
+                        Exhale through the mouth.
+                    </div>
+                    <button
+                        onClick={handleModal}
+                        className=" absolute top-4 right-4 text-2xl"
+                    >
+                        <FaTimes />
+                    </button>
+                    {isBreatheModalSwitchCounter === 1 && (
+                        <div className="text-center tracking-wider absolute -top-24 -right-12 text-2xl bg-white p-5 rounded-lg font-bold" onClick={() => setBreatheModalSwitchCounter(isBreatheModalSwitchCounter - 1)}>
+                            Click one more!
+                        </div>
+                    )}
+                </div>
+            </div>
+        );
+    }
+
+
+
     return (
         <div className="fixed font-[family-name:var(--font-geist-sans)] inset-0 flex items-center justify-center tracking-wider bg-snow-500 text-snow-700">
-            <div className="bg-gray-200 p-5 absolute w-[30%] aspect-square min-w-72 rounded-xl shadow-lg flex justify-center items-center ">
+            <div className="bg-gray-200 p-5 absolute w-[35%] aspect-square min-w-72 rounded-xl shadow-lg flex justify-center items-center ">
                 <div
                     style={{
                         width: `${circleSize}%`,
@@ -114,10 +172,10 @@ export default function Breathe() {
                     <FaTimes />
                 </button>
                 {isBreatheModalSwitchCounter === 1 && (
-                        <div className="text-center absolute -top-24 -right-12 text-2xl bg-white p-5 rounded-lg font-bold" onClick={() => setBreatheModalSwitchCounter(isBreatheModalSwitchCounter - 1)}>
-                            Click one more!
-                        </div>
-                    )}
+                    <div className="text-center absolute -top-24 -right-12 text-2xl bg-white p-5 rounded-lg font-bold" onClick={() => setBreatheModalSwitchCounter(isBreatheModalSwitchCounter - 1)}>
+                        Click one more!
+                    </div>
+                )}
             </div>
         </div>
     );

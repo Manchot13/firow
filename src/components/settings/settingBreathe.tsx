@@ -14,8 +14,8 @@ export default function SettingBreathe() {
     const tag = useSetAtom(DrumRollTagATom)
     const [isSetBreatheModal, setBreatheModal] = useAtom(breatheModalSwitch)
     const [isHandleModal, setHandleModal] = useAtom(handleState);
-    const setSettingType = useSetAtom(settingType);
-    const setIsBreatheType = useSetAtom(breatheType);
+    const setSettingType= useSetAtom(settingType);
+    const [IsBreatheType,setIsBreatheType] = useAtom(breatheType);
 
     const handleClick = () => {
         setSettingType("Setting");
@@ -35,21 +35,21 @@ export default function SettingBreathe() {
     return (
         <div className=" divide-gray-400 divide-y-2">
             <div className="grid gap-4 mt-6">
-                <button onClick={() => setIsBreatheType("Normal")}>
+                <button className={`px-4 py-2 ${IsBreatheType === "Normal" ? "bg-snow-300 rounded-2xl" : ""}`} onClick={() => setIsBreatheType("Normal")}>
                     <CircleContext
                         title={"Normal"}
-                        subTitle={"Just breathe in and out"}
+                        subTitle={"Just breathe"}
                         icon={<SiStagetimer />} //7-0-7
                     />
                 </button>
-                <button onClick={() => setIsBreatheType("Sleep")}>
+                <button className={`px-4 py-2 ${(IsBreatheType === "Sleep") ? "bg-snow-300 rounded-2xl" : ""}`} onClick={() => setIsBreatheType("Sleep")}>
                     <CircleContext
                         title={"For sleep"}
                         subTitle={"4-7-8 breathing"}
                         icon={<TbBed />} //4-7-8
                     />
                 </button>
-                <button onClick={() => setIsBreatheType("Focus")}>
+                <button className={`px-4 py-2 ${(IsBreatheType ==="Focus") ? "bg-snow-300 rounded-2xl" :""}`}  onClick={() => setIsBreatheType("Focus")}>
                     <CircleContext
                         title={"For Focus"}
                         subTitle={"Box breathing"}
