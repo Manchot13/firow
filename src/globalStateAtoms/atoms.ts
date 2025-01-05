@@ -13,6 +13,8 @@ export const isClockSecondAtom = atom(false);
 export const angleAtom = atom(0);
 export const isDraggingAtom = atom(false);
 export const pomodoroTimeAtom = atom(0);
+export const breatheTimeAtom = atom(1);
+
 type Task = {
     id: number;
     name: string;
