@@ -9,6 +9,7 @@ export const BreatheSwitch = atom(false);
 export const settingType = atom("Setting");
 export const timeAtom = atom(new Date());
 export const todoName = atom("");
+export const isClockSecondAtom = atom(false);
 export const angleAtom = atom(0);
 export const isDraggingAtom = atom(false);
 export const pomodoroTimeAtom = atom(0);
