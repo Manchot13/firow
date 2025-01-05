@@ -14,9 +14,8 @@ import { PiTextAlignLeftBold } from "react-icons/pi";
 export default function SettingMain() {
 
     return (
-        <div
-            className=" divide-gray-400 divide-y-2">
-            <div >
+        <div className=" divide-gray-400 divide-y-2">
+            <div>
                 <p className='font-bold'>
                     Sound
                 </p>
@@ -45,10 +44,10 @@ export default function SettingMain() {
                 </div>
             </div>
             <div className="flex py-4 items-center relative w-full">
-                <TextFunction title={"Advance"} type={"Advance"} icon={<LuSettings2 />} subtitle={""} />
+                <TextFunction title={"Advance"} type={"Advance"} icon={<LuSettings2 />}/>
             </div>
             <div className="flex pt-4 items-center relative w-full">
-                <TextFunction title={"Source"} type={"Source"} icon={<PiTextAlignLeftBold />} subtitle={""} />
+                <TextFunction title={"Source"} type={"Source"} icon={<PiTextAlignLeftBold />} />
             </div>
         </div>
     );

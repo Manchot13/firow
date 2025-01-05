@@ -5,12 +5,11 @@ import { IoIosArrowForward } from "react-icons/io";
 
 type Props = {
     title: string;
-    subtitle: string;
     icon: ReactNode;
     type: "Source" | "Advance" | "Drum_Roll" | "";
 };
 
-export default function TextFunction({ title,subtitle,icon, type }: Props) {
+export default function TextFunction({ title,icon, type }: Props) {
     const setSettingType = useSetAtom(settingType);
 
     const handleToggle = () => {
@@ -22,9 +21,7 @@ export default function TextFunction({ title,subtitle,icon, type }: Props) {
             <p className="text-center ml-2 text-lg font-bold">
                 {title}
             </p>
-            <p className="text-center ml-auto text-base text-snow-600 font-bold">
-                {subtitle}
-            </p>
+
             <div className="">
                 <IoIosArrowForward />
             </div>
