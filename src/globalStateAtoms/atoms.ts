@@ -17,6 +17,7 @@ export const PomodoroType = atomWithStorage('PomodoroType', "Pomodoro");
 export const settingType = atom("Setting");
 export const timeAtom = atom(new Date());
 export const todoName = atom("");
+export const isClockSecondAtom = atom(false);
 export const angleAtom = atom(0);
 export const circleSizeAtom = atom(30);
 export const ElapsedTimeAtom = atom(0);

@@ -7,7 +7,7 @@ export default function ClockModal() {
 
     return (
 		<main className="relative pt-[5%] pr-[5%]">
-			<div className="m-auto text-black text-[8vw] font-bold w-fit">
+			<div className="m-auto text-black font-bold w-fit">
 				<Clock />
 			</div>
 		</main>
