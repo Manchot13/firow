@@ -7,12 +7,14 @@ import { RiSettings3Line } from "react-icons/ri";
 import SettingFlame from "@/components/settings/settingFlame";
 import TodoModal from "@/components/todo/todoModal";
 import ClockModal from "@/components/clock/clockModal";
-import { handleState, clockSwitch, toDoSwitch } from '@/globalStateAtoms/atoms';
+import { handleState, clockSwitch, toDoSwitch, breatheModalSwitch } from '@/globalStateAtoms/atoms';
+import Breathe from "@/components/breathe/breathe";
 
 export default function Home() {
   const [isHandleModal, setHandleModal] = useAtom(handleState);
   const isClockOn = useAtomValue(clockSwitch);
   const isToDoOn = useAtomValue(toDoSwitch);
+  const isBreatheOn = useAtomValue(breatheModalSwitch);
   const handleClick = () => setHandleModal(isHandleModal === 'close' ? 'open' : 'close');
 
   return (
@@ -36,6 +38,9 @@ export default function Home() {
         <div>
           {isToDoOn === true && (
             <TodoModal />
+          )}
+          {isBreatheOn === true && (
+            <Breathe />
           )}
         </div>
         <div className="absolute right-6 top-6 text-2xl" onClick={handleClick} >
