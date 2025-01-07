@@ -7,7 +7,7 @@ import { RiSettings3Line } from "react-icons/ri";
 import SettingFlame from "@/components/settings/settingFlame";
 import TodoModal from "@/components/todo/todoModal";
 import ClockModal from "@/components/clock/clockModal";
-import { handleState, clockSwitch, toDoSwitch, breatheModalSwitch } from '@/globalStateAtoms/atoms';
+import { handleState, clockSwitch, toDoSwitch, breatheModalSwitch, fontType } from '@/globalStateAtoms/atoms';
 import Breathe from "@/components/breathe/breathe";
 
 export default function Home() {
@@ -16,9 +16,11 @@ export default function Home() {
   const isToDoOn = useAtomValue(toDoSwitch);
   const isBreatheOn = useAtomValue(breatheModalSwitch);
   const handleClick = () => setHandleModal(isHandleModal === 'close' ? 'open' : 'close');
+  const isFontType = useAtomValue(fontType);
+
 
   return (
-    <div className={`relative flex min-h-screen font-[family-name:var(--font-geist-sans)] tracking-[1em] ${styles.DotGothic16}`}>
+    <div className={`relative flex min-h-screen font-[family-name:var(--font-geist-sans)] tracking-[1em] ${isFontType === "JaPixel"? styles.DotGothic16 : isFontType === "EnPixel"? styles.cofoSansPixel: ""}`}>
       <main className="h-full min-h-screen w-full relative">
         <div className='relative min-h-screen flex justify-center items-center h-full w-full'>
           <div className="relative h-[50vh] aspect-square -z-10">
