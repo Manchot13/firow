@@ -1,10 +1,7 @@
-import { isClockSecondAtom } from "@/globalStateAtoms/atoms";
 import { useTime } from "./hooks/useTime";
-import { useAtom } from "jotai";
 import { useMemo } from 'react';
 
 export default function Clock() {
-    const [isSecondVisible] = useAtom(isClockSecondAtom);
     const currentTime = useTime();
 
     const formattedTimeParts = useMemo(() => {

@@ -41,7 +41,7 @@ export default function Home() {
 
   return (
     <ClientOnly>
-      <div className={`relative flex min-h-screen font-[family-name:var(--font-geist-sans)] tracking-[1em] ${isFontType === "JaPixel"? styles.DotGothic16 : isFontType === "EnPixel"? styles.cofoSansPixel: ""}`}>
+      <div className={`relative flex min-h-screen font-[family-name:var(--font-geist-sans)] tracking-[1em] ${isFontType === "JaPixel"? styles.DotGothic16 : isFontType === "EnPixel"? styles.cofoSansPixel: "font-mono"}`}>
         <main className="h-full min-h-screen w-full relative">
           <div className='relative min-h-screen flex justify-center items-center h-full w-full lg:flex-col'>
             <div className="relative h-[50vh] aspect-square -z-10 lg:h-[20vh]">

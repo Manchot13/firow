@@ -9,7 +9,7 @@ type Props = {
     type: "Source" | "Advance";
 };
 
-export default function sentenceFunction({ title,icon, type }: Props) {
+export default function SentenceFunction({ title,icon, type }: Props) {
     const setSettingType = useSetAtom(settingType);
 
     const handleToggle = () => {
