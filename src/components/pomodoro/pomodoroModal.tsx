@@ -93,12 +93,12 @@ export default function PomodoroModal() {
 
     return isModalOpen ? (
             <div className="relative w-full h-full">
-                <div className="absolute flex items-center left-8 bg-slate-50 shadow-xl bottom-8 p-8 rounded-2xl text-center">
-                    <div className="text-[6vw] align-text-bottom mr-4">
+                <div className="absolute flex items-center left-8 bg-slate-50 shadow-xl bottom-8 p-8 rounded-2xl text-center md:p-4">
+                    <div className="text-[6vw] align-text-bottom mr-4 md:text-2xl">
                         {isPomodoroType==="CountUp" ? formatTime(elapsedTime) : formatTime(remainingTime)} 
                     </div>
                     <div className=" tracking-wider flex-col justify-center">
-                        <h2 className="text-2xl tracking-wider mb-4">
+                        <h2 className="text-2xl tracking-wider mb-4 md:text-sm">
                             {isPomodoroType==="CountUp"
                                 ? "Count Up Time"
                                 : isFocusPhase
@@ -121,7 +121,7 @@ export default function PomodoroModal() {
                         </div>
                     </div>
                     <button
-                        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800"
+                        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 md:top-2 md:right-2"
                         onClick={() => setModalOpen(false)}
                     >
                         <FaTimes />

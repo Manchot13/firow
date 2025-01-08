@@ -15,7 +15,7 @@ export default function SettingMain() {
 
     return (
         <div className=" divide-gray-400 divide-y-2">
-            <div>
+            {/* <div>
                 <p className='font-bold'>
                     Sound
                 </p>
@@ -24,7 +24,7 @@ export default function SettingMain() {
                     <CircleButton title="Noise" icon={<CgEditNoise />} />
                     <CircleButton title="Fire" icon={<MdOutlineLocalFireDepartment />} />
                 </div>
-            </div>
+            </div> */}
             <div >
                 <p className='font-bold mt-4'>
                     Function

@@ -111,7 +111,7 @@ export default function Breathe() {
             <div className="fixed inset-0 flex items-center justify-center bg-snow-500 text-snow-700 font-[family-name:var(--font-geist-sans)]">
                 <div className="bg-gray-200 p-5 w-[35%] relative aspect-square min-w-72 rounded-xl shadow-lg flex flex-col justify-center items-center">
                     <div className="my-auto">
-                        <div className="text-4xl text-center">
+                        <div className="text-4xl text-center md:text-2xl tracking-wider">
                             Waiting...
                         </div>
                         <div className="text-4xl text-center mt-4">
