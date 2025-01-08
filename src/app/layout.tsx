@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Concentration App",
-  description: "An app to Concentrate",
+  title: "Firow",
+  description: "Firow is an app to Concentrate.",
 };
 
 export default function RootLayout({
