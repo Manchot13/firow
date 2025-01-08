@@ -2,8 +2,8 @@ import { atom } from 'jotai';
 import { atomWithStorage } from 'jotai/utils';
 // 他の atoms
 export const handleState = atom('close');
-export const clockSwitch = atomWithStorage('clockSwitch', false);
-export const toDoSwitch = atomWithStorage('toDoSwitch',false);
+export const clockSwitch = atomWithStorage('clockSwitch', true);
+export const toDoSwitch = atomWithStorage('toDoSwitch',true);
 export const setBreatheFinished = atom(false);
 export const setPomodoroFinished = atom(false);
 export const pomodoroSwitch = atom(false);
