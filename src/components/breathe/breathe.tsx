@@ -1,10 +1,10 @@
 import { breatheModalSwitch, breatheModalSwitchCounter, breatheTimeAtom, breatheType, breatheWait, breatheWaitTime, circleSizeAtom, ElapsedTimeAtom, setBreatheFinished } from "@/globalStateAtoms/atoms";
 import { useAtom, useAtomValue } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 
 export default function Breathe() {
-    const refTime = 20;
+    const refTime = 10;
     const refreshPerSecond = 1000 / refTime;
     const isBreatheType = useAtomValue(breatheType);
     const [circleSize, setLocalCircleSize] = useAtom(circleSizeAtom);
@@ -38,7 +38,7 @@ export default function Breathe() {
     useEffect(() => {
         const timer = setTimeout(() => {
             setWaiting(false); // Start breathing after 10 seconds
-        }, 7000); // 10 seconds
+        }, remainingTime*1000*2); // 10 seconds
 
         return () => clearTimeout(timer); // Clear timeout if component unmounts
     }, []);
@@ -58,12 +58,15 @@ export default function Breathe() {
             });
 
             const cyclePosition = (elapsedTime + 1) % totalCycleTime;
+            const easingFunction = (t: number) => t * t * (3 - 2 * t); // イージング関数
             if (cyclePosition < inhaleTime) {
-                setLocalCircleSize(30 + (cyclePosition / inhaleTime) * 50);
+                const progress = cyclePosition / inhaleTime;
+                setLocalCircleSize(30 + easingFunction(progress) * 50);
             } else if (cyclePosition < inhaleTime + holdTime) {
                 setLocalCircleSize(80);
             } else if (cyclePosition < inhaleTime + holdTime + exhaleTime) {
-                setLocalCircleSize(80 - ((cyclePosition - inhaleTime - holdTime) / exhaleTime) * 50);
+                const progress = (cyclePosition - inhaleTime - holdTime) / exhaleTime;
+                setLocalCircleSize(80 - easingFunction(progress) * 50);
             } else {
                 setLocalCircleSize(30);
             }
@@ -82,7 +85,7 @@ export default function Breathe() {
             setFinished(false); // Reset finished state
             setElapsedTime(0);
             setWaiting(true);
-            setRemainingTime(5);
+            setRemainingTime(2);
         }
     }, [finished, setBreatheModal, isSetBreatheModal]);
 
@@ -136,8 +139,6 @@ export default function Breathe() {
         );
     }
 
-
-
     return (
         <div className="fixed font-[family-name:var(--font-geist-sans)] inset-0 flex items-center justify-center tracking-wider bg-snow-500 text-snow-700">
             <div className="bg-gray-200 p-5 absolute w-[35%] aspect-square min-w-72 rounded-xl shadow-lg flex justify-center items-center ">
@@ -146,9 +147,10 @@ export default function Breathe() {
                         width: `${circleSize}%`,
                         paddingTop: `${circleSize / 2}%`,
                         paddingBottom: `${circleSize / 2}%`,
+                        // borderRadius: `41% 58% 42% 57% / 47% 47% 48% 44%`,
                     }}
-                    className={`rounded-full bg-gradient-to-bl relative aspect-square m-auto from-snow-50 to-snow-800 border-[1px] border-white`}
-                >
+                    className='bg-gradient-to-bl relative aspect-square m-auto from-snow-50 to-snow-800 border-[1px] rounded-full border-white'
+                    >
                     <div className="flex items-center justify-center relative text-center h-full text-snow-800"
                         style={{
                             fontSize: `${circleSize * 2}%`
