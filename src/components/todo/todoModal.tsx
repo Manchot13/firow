@@ -29,15 +29,15 @@ export default function TodoModal() {
     };
 
     return (
-        <div className="absolute top-10 left-10 tracking-widest">
-            <div className="flex items-end gap-4 text-3xl font-bold">
+        <div className="absolute top-10 left-10 tracking-widest md:text-sm md:top-6 md:left-6">
+            <div className="flex items-end gap-4 text-3xl font-bold md:text-lg">
                 <div className="flex items-center gap-4">
                     <FaTasks className="text-2xl" />
                     <p>Task List</p>
                 </div>
                 <div className="text-xl">{list.length} tasks</div>
             </div>
-            <div className="flex gap-4 border-b border-gray-300">
+            <div className="flex gap-4 border-b border-gray-300 md:mb-2">
                 <input
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -60,7 +60,7 @@ export default function TodoModal() {
             </div>
             <ul>
                 {list.map((item) => (
-                    <li key={item.id} className="my-4 flex items-center gap-4">
+                    <li key={item.id} className="my-4 flex items-center gap-4 md:my-2">
                         <button
                             onClick={() => removeTask(item.id)}
                             className="hover:text-red-500 transition"

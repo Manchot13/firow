@@ -43,13 +43,12 @@ export default function Home() {
     <ClientOnly>
       <div className={`relative flex min-h-screen font-[family-name:var(--font-geist-sans)] tracking-[1em] ${isFontType === "JaPixel"? styles.DotGothic16 : isFontType === "EnPixel"? styles.cofoSansPixel: ""}`}>
         <main className="h-full min-h-screen w-full relative">
-          <div className='relative min-h-screen flex justify-center items-center h-full w-full'>
-            <div className="relative h-[50vh] aspect-square -z-10">
+          <div className='relative min-h-screen flex justify-center items-center h-full w-full lg:flex-col'>
+            <div className="relative h-[50vh] aspect-square -z-10 lg:h-[20vh]">
               <Image
                 src="/fire.gif"
                 alt="shishiodoshi picture"
                 fill
-                sizes="20vw"
                 style={{ objectFit: 'contain' }}
                 priority
               />
@@ -66,16 +65,16 @@ export default function Home() {
               <PomodoroModal />
             )}
           </div>
-          <div className="absolute right-6 top-6 text-2xl flex">
-            <div className='flex justify-center tracking-wider gap-[10%] mr-4'>
-              <div className=" cursor-pointer p-2 rounded-md flex justify-center hover:bg-snow-300 w-fit h-full" onClick={() => (setPomodoroOn(!isPomodoroOn))}>
+          <div className="absolute right-6 top-6 text-2xl flex md:flex-col-reverse md:items-end md:right-2">
+            <div className='flex justify-center tracking-wider gap-[10%] mr-4 md:hidden'>
+              <div className=" cursor-pointer p-2 rounded-md flex justify-center hover:bg-snow-300 w-fit h-full md:pr-0" onClick={() => (setPomodoroOn(!isPomodoroOn))}>
                 <Function title="Pomodoro" icon={<CgTimer />} type='none' />
               </div>
-              <div className=" cursor-pointer p-2 rounded-md flex justify-center hover:bg-snow-300 w-full h-full"  onClick={() => (setBreatheOn(!isBreatheOn))}>
+              <div className=" cursor-pointer p-2 rounded-md flex justify-center hover:bg-snow-300 w-full h-full md:pr-0"  onClick={() => (setBreatheOn(!isBreatheOn))}>
                 <Function title="Breathe" icon={<LuLeaf />} type='none' />
               </div>
             </div>
-            <div onClick={handleClick}>
+            <div onClick={handleClick} className="md:mr-4 md:mb-4">
               <RiSettings3Line className='text-4xl transition-transform duration-300 ease-in-out hover:rotate-180' />
             </div>
             {isHandleModal === 'open' && (
