@@ -26,12 +26,16 @@ export const isDraggingAtom = atom(false);
 export const pomodoroTimeAtom = atomWithStorage('pomodoroTimeAtom',25);
 export const pomodoroBreakTimeAtom = atomWithStorage('pomodoroBreakTimeAtom',5);
 export const pomodoroLongBreakTimeAtom = atomWithStorage('pomodoroLongBreakTimeAtom',15);
-export const pomodoroTimesAtom = atomWithStorage('pomodoroTimesAtom',40);
+export const pomodoroTimesAtom = atomWithStorage('pomodoroTimesAtom',4);
 export const breatheTimeAtom = atomWithStorage("breatheTimeAtom",1);
 export const drumRollTimeAtom = atom(1);
 export const startTimeAtom = atom(1);
 export const endTimeAtom = atom(10);
+export const remainingPoromodoTime = atom(0);
+export const elapsedPoromodoTime = atom(0);
+export const poromodoFocusPhase = atom(true);
 export const timeIntervalAtom = atom(2);
+export const porodomoSessionCounter = atom(0);
 export const DrumRollTagATom = atom("Setting");
 
 type Task = {

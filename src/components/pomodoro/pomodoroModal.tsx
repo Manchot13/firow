@@ -1,4 +1,4 @@
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect, useState } from "react";
 import { FaTimes } from "react-icons/fa";
 import {
@@ -6,6 +6,12 @@ import {
     setBreatheFinished,
     pomodoroModalSwitch,
     PomodoroType,
+    remainingPoromodoTime,
+    poromodoFocusPhase,
+    elapsedPoromodoTime,
+    porodomoSessionCounter,
+    pomodoroTimesAtom,
+    pomodoroBreakTimeAtom,
 } from "@/globalStateAtoms/atoms";
 
 export default function PomodoroModal() {
@@ -13,12 +19,12 @@ export default function PomodoroModal() {
     const [isModalOpen, setModalOpen] = useAtom(pomodoroModalSwitch); // モーダルの表示/非表示
     const [isPomodoroType, setIsPomodoroType] = useAtom(PomodoroType); // モーダルの表示/非表示
     const setBreatheFinishedState = useSetAtom(setBreatheFinished); // セッション終了通知
-    const [isFocusPhase, setFocusPhase] = useState(true); // 現在が集中か休憩かを管理
-    const [remainingTime, setRemainingTime] = useState(pomodoroTime * 60); // 現在のフェーズの残り時間（秒単位）
-    const [elapsedTime, setElapsedTime] = useState(0); // カウントアップで経過した時間（秒）
-    const [sessionCounter, setSessionCounter] = useState(0); // 現在のセッション数
-    const maxSessions = 4; // 最大セッション数
-    const breakTime = 5 * 60; // 休憩時間（秒）
+    const [isFocusPhase, setFocusPhase] = useAtom(poromodoFocusPhase); // 現在が集中か休憩かを管理
+    const [remainingTime, setRemainingTime] = useAtom(remainingPoromodoTime); // 現在のフェーズの残り時間（秒単位）
+    const [elapsedTime, setElapsedTime] = useAtom(elapsedPoromodoTime); // カウントアップで経過した時間（秒）
+    const [sessionCounter, setSessionCounter] = useAtom(porodomoSessionCounter); // 現在のセッション数
+    const maxSessions = useAtomValue(pomodoroTimesAtom); // 最大セッション数
+    const breakTime = useAtomValue(pomodoroBreakTimeAtom)*60; // 休憩時間（秒）
 
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
@@ -28,6 +34,7 @@ export default function PomodoroModal() {
 
     // タイマー処理
     useEffect(() => {
+        setRemainingTime(pomodoroTime * 60)
         let timer: NodeJS.Timeout | null = null;
 
         if (isModalOpen) {
