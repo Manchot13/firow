@@ -7,15 +7,17 @@ import { RiSettings3Line } from "react-icons/ri";
 import SettingFlame from "@/components/settings/settingFlame";
 import TodoModal from "@/components/todo/todoModal";
 import ClockModal from "@/components/clock/clockModal";
-import { handleState, clockSwitch, toDoSwitch, breatheModalSwitch } from '@/globalStateAtoms/atoms';
+import { handleState, clockSwitch, toDoSwitch, breatheModalSwitch, pomodoroModalSwitch } from '@/globalStateAtoms/atoms';
 import Breathe from "@/components/breathe/breathe";
 import React from 'react'; // Reactをインポート
+import PomodoroModal from "@/components/pomodoro/pomodoroModal";
 
 export default function Home() {
   const [isHandleModal, setHandleModal] = useAtom(handleState);
   const isClockOn = useAtomValue(clockSwitch);
   const isToDoOn = useAtomValue(toDoSwitch);
   const isBreatheOn = useAtomValue(breatheModalSwitch);
+  const isPomodoroOn = useAtomValue(pomodoroModalSwitch);
   const handleClick = () => setHandleModal(isHandleModal === 'close' ? 'open' : 'close');
   function ClientOnly({ children, ...delegated }: { children: React.ReactNode }) { // 型を追加
     const [hasMounted, setHasMounted] = React.useState<boolean>(false); // 型を追加
@@ -57,6 +59,9 @@ export default function Home() {
             )}
             {isBreatheOn === true && (
               <Breathe />
+            )}
+            {isPomodoroOn === true && (
+              <PomodoroModal />
             )}
           </div>
           <div className="absolute right-6 top-6 text-2xl" onClick={handleClick} >

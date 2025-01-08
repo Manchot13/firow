@@ -10,6 +10,7 @@ type Props = {
     tag: string;
 };
 
+// 修正済みコード
 export default function SettingDrumRoll({ startTime, endTime, timeInterval, tag }: Props) {
     const setSettingType = useSetAtom(settingType);
     const drumContainerRef = useRef<HTMLDivElement>(null);
@@ -18,7 +19,6 @@ export default function SettingDrumRoll({ startTime, endTime, timeInterval, tag 
     const itemHeight = 40;
 
     const deltaTime = endTime - startTime;
-    const TimePerInterval = deltaTime / timeInterval;
 
     const isSwitchTime = () => {
         switch (tag) {
@@ -29,37 +29,29 @@ export default function SettingDrumRoll({ startTime, endTime, timeInterval, tag 
         }
     };
 
-    const SetSwitchTime = (index: any) => {
+    const SetSwitchTime = (value: number) => {
         switch (tag) {
             case 'Breathe':
-                return setBreatheTime(Math.trunc(index)); // 修正: setMinutesを削除し、indexを使用;
+                return setBreatheTime(value);
             case 'Pomodoro':
-                return setPomodoroTime(Math.trunc(index)); // 修正: setMinutesを削除し、indexを使用;
+                return setPomodoroTime(value);
             default:
-                return 0;
+                return;
         }
-    }
-
+    };
 
     const handleScroll = (e: React.WheelEvent) => {
         e.preventDefault();
 
-        const scrollSensitivity = 0.2; // スクロール感度（値を小さくして変化を緩やかに）
-        const delta = e.deltaY * scrollSensitivity; // スクロール量に感度を掛ける
+        const scrollSensitivity = 0.1; // スクロール感度を調整
+        const delta = e.deltaY * scrollSensitivity;
 
-        const switchTimeValue = isSwitchTime(); // 現在の値を取得
+        const switchTimeValue = isSwitchTime();
         if (switchTimeValue !== undefined) {
-            // スクロールで値を変更
             const newTime = switchTimeValue + delta * timeInterval;
-
-            // 範囲内に制限
             const clampedTime = Math.max(startTime, Math.min(newTime, endTime));
-
-            // インデックス計算
             const selectedIndex = Math.round((clampedTime - startTime) / timeInterval);
-
-            // 更新処理を呼び出し
-            SetSwitchTime(selectedIndex * timeInterval + startTime); // インデックスを実際の時間に変換
+            SetSwitchTime(selectedIndex * timeInterval + startTime);
         }
     };
 
@@ -85,12 +77,11 @@ export default function SettingDrumRoll({ startTime, endTime, timeInterval, tag 
             if (drumContainerRef.current) {
                 const currentTop = drumContainerRef.current.offsetTop || 0;
                 const nearestTop = Math.round(currentTop / itemHeight) * itemHeight;
-
-                // 0未満の場合は0に設定
                 const finalTop = Math.max(nearestTop, 0);
                 drumContainerRef.current.style.top = `${finalTop}px`;
-                const selectedIndex = Math.abs(Math.round(finalTop / itemHeight)) % Math.trunc(deltaTime / timeInterval);
-                SetSwitchTime(selectedIndex)
+                const selectedIndex = Math.round(finalTop / itemHeight);
+                const newValue = startTime + selectedIndex * timeInterval;
+                SetSwitchTime(newValue);
             }
         };
 
@@ -100,26 +91,24 @@ export default function SettingDrumRoll({ startTime, endTime, timeInterval, tag 
         window.addEventListener('touchend', handleDragEnd);
     };
 
-    const handleTap = (index: number) => {
-        SetSwitchTime(index)
+    const handleTap = (timeValue: number) => {
+        SetSwitchTime(timeValue);
         setSettingType(tag);
     };
 
     useEffect(() => {
         if (drumContainerRef.current) {
-            const switchTimeValue = isSwitchTime(); // isSwitchTimeを呼び出して値を取得
+            const switchTimeValue = isSwitchTime();
             if (switchTimeValue !== undefined) {
-                drumContainerRef.current.style.top = `-${(switchTimeValue - 4) * itemHeight}px`;
+                const offsetIndex = Math.round((switchTimeValue - startTime) / timeInterval);
+                drumContainerRef.current.style.top = `-${offsetIndex * itemHeight}px`;
             }
         }
     }, [isSwitchTime]);
 
-
     return (
         <MantineProvider>
-            <div
-                className="divide-y-2"
-            >
+            <div className="divide-y-2">
                 <div
                     className="relative h-[200px] overflow-hidden"
                     onWheel={handleScroll}
@@ -127,14 +116,14 @@ export default function SettingDrumRoll({ startTime, endTime, timeInterval, tag 
                     onTouchStart={handleDragStart}
                 >
                     <div ref={drumContainerRef} className="absolute w-full text-xl">
-                        {[...Array(Math.floor(deltaTime) + 1)].map((_, index) => {
+                        {[...Array(Math.floor(deltaTime / timeInterval) + 1)].map((_, index) => {
                             const timeValue = startTime + index * timeInterval;
-
-                            // 現在のスクロール位置を取得
                             return (
                                 <div
                                     key={index}
-                                    className={`h-[40px] flex items-center justify-center cursor-pointer text-snow-400 ${index === Math.trunc(isSwitchTime() ?? 0) - 1 ? "font-bold text-3xl text-snow-700" : ""}`}
+                                    className={`h-[40px] flex items-center justify-center cursor-pointer ${
+                                        timeValue === isSwitchTime() ? "font-bold text-3xl text-snow-700" : "text-snow-400"
+                                    }`}
                                     onClick={() => handleTap(timeValue)}
                                 >
                                     {timeValue}
@@ -144,8 +133,8 @@ export default function SettingDrumRoll({ startTime, endTime, timeInterval, tag 
                     </div>
                 </div>
 
-                <div className="text-center mt-2 pt-2 border-t-2 border-snow-600 text-xl font-semibold ">
-                    {Math.trunc(isSwitchTime() ?? 0)} 分
+                <div className="text-center mt-2 pt-2 border-t-2 border-snow-600 text-xl font-semibold">
+                    {isSwitchTime()} 分
                 </div>
             </div>
         </MantineProvider>
