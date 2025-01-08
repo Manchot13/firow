@@ -1,11 +1,8 @@
-import CircleButton from "@/components/settings/circleButton";
 import Function from "@/components/settings/function";
 import ButtonFunction from "@/components/settings/buttonFunction";
-import { CgEditNoise, CgTimer } from "react-icons/cg";
+import { CgTimer } from "react-icons/cg";
 import { FiClock } from 'react-icons/fi';
 import { FaTasks } from 'react-icons/fa';
-import { MdOutlineLocalFireDepartment } from "react-icons/md";
-import { BsCloudRain } from "react-icons/bs";
 import { LuLeaf, LuSettings2 } from "react-icons/lu";
 import TextFunction from "./textFunction";
 import { PiTextAlignLeftBold } from "react-icons/pi";

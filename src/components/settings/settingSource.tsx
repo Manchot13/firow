@@ -1,6 +1,3 @@
-import { settingType } from "@/globalStateAtoms/atoms";
-import { useSetAtom } from "jotai";
-import { IoIosArrowBack } from "react-icons/io";
 
 export default function SettingSource() {
 

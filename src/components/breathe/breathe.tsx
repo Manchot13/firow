@@ -37,11 +37,11 @@ export default function Breathe() {
 
     useEffect(() => {
         const timer = setTimeout(() => {
-            setWaiting(false); // Start breathing after 10 seconds
-        }, remainingTime*1000*2); // 10 seconds
-
-        return () => clearTimeout(timer); // Clear timeout if component unmounts
-    }, []);
+            setWaiting(false);
+        }, remainingTime * 1000 * 2);
+    
+        return () => clearTimeout(timer);
+    }, [remainingTime, setWaiting]); 
 
     useEffect(() => {
         if (waiting) return; // Don't start breathing if waiting

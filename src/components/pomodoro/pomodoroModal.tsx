@@ -1,5 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FaTimes } from "react-icons/fa";
 import {
     pomodoroTimeAtom,
@@ -17,7 +17,7 @@ import {
 export default function PomodoroModal() {
     const [pomodoroTime] = useAtom(pomodoroTimeAtom); // 1セッションの集中時間（分）
     const [isModalOpen, setModalOpen] = useAtom(pomodoroModalSwitch); // モーダルの表示/非表示
-    const [isPomodoroType, setIsPomodoroType] = useAtom(PomodoroType); // モーダルの表示/非表示
+    const isPomodoroType = useAtomValue(PomodoroType); // モーダルの表示/非表示
     const setBreatheFinishedState = useSetAtom(setBreatheFinished); // セッション終了通知
     const [isFocusPhase, setFocusPhase] = useAtom(poromodoFocusPhase); // 現在が集中か休憩かを管理
     const [remainingTime, setRemainingTime] = useAtom(remainingPoromodoTime); // 現在のフェーズの残り時間（秒単位）
