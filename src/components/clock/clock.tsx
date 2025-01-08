@@ -36,7 +36,7 @@ export default function Clock() {
     }, [currentTime]);
 
     return (
-        <div className="text-[8vw] flex items-baseline font-mono">
+        <div className="text-[8vw] flex items-baseline">
             <div className="pr-4">
                 {formattedTimeParts.formattedTimeWithoutSeconds}
             </div>

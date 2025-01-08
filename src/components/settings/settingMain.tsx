@@ -44,10 +44,10 @@ export default function SettingMain() {
                 </div>
             </div>
             <div className="flex py-4 items-center relative w-full">
-                <TextFunction title={"Advance"} type={"Advance"} icon={<LuSettings2 />}/>
+                <TextFunction title={"Advance"} type={"Advance"} icon={<LuSettings2 />} text={undefined}/>
             </div>
             <div className="flex pt-4 items-center relative w-full">
-                <TextFunction title={"Source"} type={"Source"} icon={<PiTextAlignLeftBold />} />
+                <TextFunction title={"Source"} type={"Source"} icon={<PiTextAlignLeftBold />} text={undefined} />
             </div>
         </div>
     );
