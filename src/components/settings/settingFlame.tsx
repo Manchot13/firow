@@ -52,7 +52,7 @@ export default function SettingFlame() {
             <p className="absolute bottom-[5vw] -left-[3vw] text-white text-[20vw] items-end font-bold opacity-50">
                 {settingText}
             </p>
-            <div className="bg-gray-200 p-5 absolute right-5 top-5 w-[15%] min-w-72 rounded-xl shadow-lg"
+            <div className="bg-gray-200 p-5 absolute right-5 top-5 w-[15%] min-w-72 rounded-xl shadow-lg md:min-w-[90%]"
                 onClick={(e) => e.stopPropagation()} // 子要素クリックで背景イベントを止める
             // 子要素クリックで背景イベントを止める
             >

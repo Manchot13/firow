@@ -36,11 +36,11 @@ export default function Clock() {
     }, [currentTime]);
 
     return (
-        <div className="text-[8vw] flex items-baseline">
+        <div className="text-[8vw] flex items-baseline md:text-[12vw] md:tracking-[2vw]">
             <div className="pr-4">
                 {formattedTimeParts.formattedTimeWithoutSeconds}
             </div>
-            <div className="text-[4vw]">
+            <div className="text-[4vw] md:text-[8vw]">
                 {formattedTimeParts.formattedSeconds}
             </div>
         </div>
