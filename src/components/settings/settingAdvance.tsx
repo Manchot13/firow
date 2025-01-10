@@ -18,10 +18,10 @@ export default function SettingAdvance() {
                     Fonts
                 </p>
                 <div className='flex flex-col my-5 justify-center gap-2'>
-                    <div onClick={() => handleToggle("JaSelif")} className={`${(isFontType === "JaSelif") ? "bg-snow-300 rounded-2xl" : ""}`}>
+                    <div onClick={() => handleToggle("JaSelif")} className={`p-2 ${(isFontType === "JaSelif") ? "bg-snow-300 rounded-2xl" : ""}`}>
                         <CircleContext title="Ja selif" icon={<IoTextSharp />} subTitle={""} />
                     </div>
-                    <div onClick={() => handleToggle("JaPixel")} className={`${(isFontType === "JaPixel") ? "bg-snow-300 rounded-2xl" : ""}`}>
+                    <div onClick={() => handleToggle("JaPixel")} className={`p-2 ${(isFontType === "JaPixel") ? "bg-snow-300 rounded-2xl" : ""}`}>
                         <CircleContext title="Ja pixel" icon={<IoTextSharp />} subTitle={""} />
                     </div>
 

@@ -8,7 +8,7 @@ export default function SwitchButton({ isOn, onToggle }: SwitchButtonProps) {
         <button
             onClick={onToggle}
             className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer transition-all 
-                ${isOn ? "bg-green-500" : "bg-gray-400"}`}
+                ${isOn ? "bg-trinidad-500" : "bg-gray-400"}`}
         >
             <div
                 className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform 
