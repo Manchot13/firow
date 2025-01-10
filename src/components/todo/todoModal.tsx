@@ -42,7 +42,7 @@ export default function TodoModal() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Enter a task name"
-                    className="p-2 w-full focus:outline-none transition"
+                    className="p-2 w-full focus:outline-none transition bg-snow-100"
                     onCompositionStart={() => setIsComposing(true)} // 変換開始
                     onCompositionEnd={() => setIsComposing(false)}   // 変換確定
                     onKeyDown={(e) => {
@@ -63,7 +63,7 @@ export default function TodoModal() {
                     <li key={item.id} className="my-4 flex items-center gap-4 md:my-2">
                         <button
                             onClick={() => removeTask(item.id)}
-                            className="hover:text-red-500 transition"
+                            className="hover:text-trinidad-500 transition"
                         >
                             <FaRegCircle />
                         </button>
