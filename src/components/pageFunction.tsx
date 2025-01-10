@@ -1,5 +1,3 @@
-import { breatheSwitch, pomodoroSwitch, settingType } from "@/globalStateAtoms/atoms";
-import { useAtom, useSetAtom } from "jotai";
 import { ReactNode } from "react";
 
 type Props = {
