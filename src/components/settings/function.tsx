@@ -28,7 +28,7 @@ export default function Function({ title, icon, type }: Props) {
     return (
         <div className="w-[40%] flex flex-col items-center justify-center">
             <button 
-                className="bg-white  hover:bg-gray-100 aspect-square rounded-[20%] w-[90%] text-[100%]"
+                className="bg-snow-50 hover:bg-snow-200 aspect-square rounded-[20%] w-[90%] text-[100%]"
                 onClick={handleToggle} 
             >
                 <div className="w-full h-full flex ">

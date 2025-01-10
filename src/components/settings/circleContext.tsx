@@ -10,7 +10,7 @@ export default function circleContext({ title, subTitle, icon }: Props) {
     return (
         <div className="flex gap-4 items-center">
             <div className=" relative">
-                <div className="bg-white hover:bg-gray-100 aspect-square rounded-full w-full text-[100%]">
+                <div className="bg-snow-50 hover:bg-gray-100 aspect-square rounded-full w-full text-[100%]">
                     <div className="w-full h-full flex items-center justify-center">
                         <div className="w-full h-full flex items-center justify-center text-2xl m-5">
                             {icon}

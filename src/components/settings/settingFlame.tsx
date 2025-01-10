@@ -46,13 +46,10 @@ export default function SettingFlame() {
 
     return (
         <div
-            className="fixed font-[family-name:var(--font-geist-sans)] inset-0 flex items-center justify-center tracking-wider bg-black bg-opacity-70 text-snow-700"
+            className="fixed inset-0 flex items-center justify-center tracking-wider backdrop-blur-sm bg-white bg-opacity-80 text-snow-700"
             onClick={handleClick}
         >
-            <p className="absolute bottom-[5vw] -left-[3vw] text-white text-[20vw] items-end font-bold opacity-50">
-                {settingText}
-            </p>
-            <div className="bg-gray-200 p-5 absolute right-5 top-5 w-[15%] min-w-72 rounded-xl shadow-lg"
+            <div className="bg-snow-100 p-5 absolute right-5 top-5 w-[15%] min-w-72 rounded-xl shadow-xl border-2 border-solid border-snow-200"
                 onClick={(e) => e.stopPropagation()} // 子要素クリックで背景イベントを止める
             // 子要素クリックで背景イベントを止める
             >
@@ -74,6 +71,9 @@ export default function SettingFlame() {
                 {renderContent()}
 
             </div>
+            <p className="absolute bottom-[5vw] -left-[3vw] text-snow-300 text-[20vw] items-end font-bold opacity-50">
+                {settingText}
+            </p>
         </div>
     );
 }

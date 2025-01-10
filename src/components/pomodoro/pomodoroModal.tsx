@@ -17,7 +17,7 @@ import {
 export default function PomodoroModal() {
     const [pomodoroTime] = useAtom(pomodoroTimeAtom); // 1セッションの集中時間（分）
     const [isModalOpen, setModalOpen] = useAtom(pomodoroModalSwitch); // モーダルの表示/非表示
-    const [isPomodoroType, setIsPomodoroType] = useAtom(PomodoroType); // モーダルの表示/非表示
+    const [isPomodoroType] = useAtom(PomodoroType); // モーダルの表示/非表示
     const setBreatheFinishedState = useSetAtom(setBreatheFinished); // セッション終了通知
     const [isFocusPhase, setFocusPhase] = useAtom(poromodoFocusPhase); // 現在が集中か休憩かを管理
     const [remainingTime, setRemainingTime] = useAtom(remainingPoromodoTime); // 現在のフェーズの残り時間（秒単位）
@@ -93,7 +93,7 @@ export default function PomodoroModal() {
 
     return isModalOpen ? (
             <div className="relative w-full h-full">
-                <div className="absolute flex items-center left-8 bg-slate-50 shadow-xl bottom-8 p-8 rounded-2xl text-center md:p-4">
+                <div className="absolute flex items-center left-8 bg-snow-100 bg-opacity-75 shadow-xl bottom-8 p-8 rounded-2xl text-center md:p-4 border-2 border-solid border-snow-200">
                     <div className="text-[6vw] align-text-bottom mr-4 md:text-2xl">
                         {isPomodoroType==="CountUp" ? formatTime(elapsedTime) : formatTime(remainingTime)} 
                     </div>
@@ -113,7 +113,7 @@ export default function PomodoroModal() {
                         )}
                         <div className="mt-4 flex gap-4">
                             <button
-                                className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
+                                className="px-4 py-2 bg-trinidad-500 text-white rounded-lg hover:bg-trinidad-600"
                                 onClick={() => setModalOpen(false)}
                             >
                                 End Session

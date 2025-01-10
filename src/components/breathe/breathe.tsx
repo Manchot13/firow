@@ -140,8 +140,8 @@ export default function Breathe() {
     }
 
     return (
-        <div className="fixed font-[family-name:var(--font-geist-sans)] inset-0 flex items-center justify-center tracking-wider bg-snow-500 text-snow-700">
-            <div className="bg-gray-200 p-5 absolute w-[35%] aspect-square min-w-72 rounded-xl shadow-lg flex justify-center items-center ">
+        <div className="fixed inset-0 flex items-center justify-center tracking-wider bg-snow-500 text-snow-700">
+            <div className="bg-snow-100 p-5 absolute w-[35%] aspect-square min-w-72 rounded-xl shadow-xl flex justify-center items-center border-2 border-solid border-snow-200">
                 <div
                     style={{
                         width: `${circleSize}%`,
@@ -149,7 +149,7 @@ export default function Breathe() {
                         paddingBottom: `${circleSize / 2}%`,
                         // borderRadius: `41% 58% 42% 57% / 47% 47% 48% 44%`,
                     }}
-                    className='bg-gradient-to-bl relative aspect-square m-auto from-snow-50 to-snow-800 border-[1px] rounded-full border-white'
+                    className='bg-gradient-to-bl relative aspect-square m-auto from-snow-50 to-snow-800 border-[1px] rounded-full '
                     >
                     <div className="flex items-center justify-center relative text-center h-full text-snow-800"
                         style={{
