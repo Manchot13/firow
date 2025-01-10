@@ -2,16 +2,11 @@ import { pomodoroTimesAtom, DrumRollTagATom, endTimeAtom, handleState, pomodoroB
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { IoIosArrowForward } from "react-icons/io";
 import { SiStagetimer } from "react-icons/si";
-import CircleButton from "./circleButton";
-import { PiInfinityBold, PiTimerBold } from "react-icons/pi";
+import { PiInfinityBold } from "react-icons/pi";
 import CircleContext from "./circleContext";
-import TextFunction from "./textFunction";
 
 export default function SettingPomodoro() {
     const pomodoroTime = useAtomValue(pomodoroTimeAtom)
-    const pomodoroBreakTime = useAtomValue(pomodoroBreakTimeAtom)
-    const pomodoroLongBreakTime = useAtomValue(pomodoroLongBreakTimeAtom)
-    const pomodoroTimes = useAtomValue(pomodoroTimesAtom)
     const startTime = useSetAtom(startTimeAtom)
     const endTime = useSetAtom(endTimeAtom)
     const timeInterval = useSetAtom(timeIntervalAtom)

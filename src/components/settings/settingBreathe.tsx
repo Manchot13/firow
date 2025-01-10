@@ -1,6 +1,6 @@
 import { breatheModalSwitch, breatheTimeAtom, breatheType, DrumRollTagATom, endTimeAtom, handleState, settingType, startTimeAtom, timeIntervalAtom } from "@/globalStateAtoms/atoms";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowForward } from "react-icons/io";
 import { RiFocusLine } from "react-icons/ri";
 import { SiStagetimer } from "react-icons/si";
 import { TbBed } from "react-icons/tb";
