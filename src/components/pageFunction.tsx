@@ -8,7 +8,7 @@ type Props = {
 export default function PageFunction({ title, icon }: Props) {
 
     return (
-        <div className="flex p-2 flex-col items-center justify-center">
+        <div className="flex p-2 min-w-20 flex-col items-center justify-center">
             <button
                 className="aspect-square rounded-[20%]"
             >

@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
 import {
     pomodoroTimeAtom,
     setBreatheFinished,
@@ -24,7 +23,7 @@ export default function PomodoroModal() {
     const [elapsedTime, setElapsedTime] = useAtom(elapsedPoromodoTime); // カウントアップで経過した時間（秒）
     const [sessionCounter, setSessionCounter] = useAtom(porodomoSessionCounter); // 現在のセッション数
     const maxSessions = useAtomValue(pomodoroTimesAtom); // 最大セッション数
-    const breakTime = useAtomValue(pomodoroBreakTimeAtom)*60; // 休憩時間（秒）
+    const breakTime = useAtomValue(pomodoroBreakTimeAtom) * 60; // 休憩時間（秒）
 
     const formatTime = (seconds: number) => {
         const minutes = Math.floor(seconds / 60);
@@ -39,7 +38,7 @@ export default function PomodoroModal() {
 
         if (isModalOpen) {
             timer = setInterval(() => {
-                if (isPomodoroType==="CountUp") {
+                if (isPomodoroType === "CountUp") {
                     // カウントアップモード
                     setElapsedTime((prev) => prev + 1);
                 } else {
@@ -92,41 +91,35 @@ export default function PomodoroModal() {
     ]);
 
     return isModalOpen ? (
-            <div className="relative w-full h-full">
-                <div className="absolute flex items-center left-8 bg-snow-100 bg-opacity-75 shadow-xl bottom-8 p-8 rounded-2xl text-center md:p-4 border-2 border-solid border-snow-200">
-                    <div className="text-[6vw] align-text-bottom mr-4 md:text-2xl">
-                        {isPomodoroType==="CountUp" ? formatTime(elapsedTime) : formatTime(remainingTime)} 
-                    </div>
-                    <div className=" tracking-wider flex-col justify-center">
-                        <h2 className="text-2xl tracking-wider mb-4 md:text-sm">
-                            {isPomodoroType==="CountUp"
-                                ? "Count Up Time"
-                                : isFocusPhase
-                                ? "Focus Time"
-                                : "Break Time"}
-                        </h2>
-                        {isPomodoroType==="Pomodoro" && (
-                            <div className="my-4 text-gray-500">
-                                Session {sessionCounter + (isFocusPhase ? 1 : 0)} /{" "}
-                                {maxSessions}
-                            </div>
-                        )}
-                        <div className="mt-4 flex gap-4">
-                            <button
-                                className="px-4 py-2 bg-trinidad-500 text-white rounded-lg hover:bg-trinidad-600"
-                                onClick={() => setModalOpen(false)}
-                            >
-                                End Session
-                            </button>
+        <div className="relative">
+            <div className="bg-opacity-75 p-8 rounded-2xl text-center md:p-4">
+                <h2 className="text-2xl text-left tracking-wider md:text-sm">
+                    {isPomodoroType === "CountUp"
+                        ? "Count Up Time"
+                        : isFocusPhase
+                            ? "Focus Time"
+                            : "Break Time"}
+                </h2>
+                <div className="text-[8vw] align-text-bottom md:text-2xl">
+                    {isPomodoroType === "CountUp" ? formatTime(elapsedTime) : formatTime(remainingTime)}
+                </div>
+                <div className=" tracking-wider flex items-center">
+                    {isPomodoroType === "Pomodoro" && (
+                        <div className=" text-gray-500 flex items-end">
+                            <p>Session</p> 
+                            <p className="text-xl ml-2">{sessionCounter + (isFocusPhase ? 1 : 0)} /{" "}{maxSessions} </p>
                         </div>
+                    )}
+                    <div className="flex ml-auto">
+                        <button
+                            className="px-4 py-2 bg-trinidad-500 text-white rounded-lg hover:bg-trinidad-600"
+                            onClick={() => setModalOpen(false)}
+                        >
+                            End Session
+                        </button>
                     </div>
-                    <button
-                        className="absolute top-4 right-4 text-gray-500 hover:text-gray-800 md:top-2 md:right-2"
-                        onClick={() => setModalOpen(false)}
-                    >
-                        <FaTimes />
-                    </button>
                 </div>
             </div>
+        </div>
     ) : null;
 }
