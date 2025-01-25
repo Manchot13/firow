@@ -1,6 +1,5 @@
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
-import { FaTimes } from "react-icons/fa";
 import {
     pomodoroTimeAtom,
     setBreatheFinished,
