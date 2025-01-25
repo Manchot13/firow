@@ -6,7 +6,7 @@ const Clock = dynamic(() => import("@/components/clock/clock"), {
 export default function ClockModal() {
 
     return (
-		<main className="relative pt-[5%] pr-[5%]">
+		<main className="relative">
 			<div className="m-auto text-black w-fit">
 				<Clock />
 			</div>

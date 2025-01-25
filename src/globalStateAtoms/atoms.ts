@@ -11,6 +11,7 @@ export const breatheSwitch = atom(false);
 export const breatheWait = atom(true);
 export const breatheWaitTime = atom(2);
 export const breatheModalSwitch = atom(false);
+export const eyeModalSwitch = atom(false);
 export const pomodoroModalSwitch = atom(false);
 export const breatheModalSwitchCounter = atom(0);
 export const breatheType = atomWithStorage('breatheType',"Normal");
